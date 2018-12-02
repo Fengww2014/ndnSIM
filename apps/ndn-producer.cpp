@@ -103,13 +103,16 @@ Producer::OnInterest(shared_ptr<const Interest> interest)
   Name dataName(interest->getName());
   // dataName.append(m_postfix);
   // dataName.appendVersion();
-
+  
+  static const std::string content = "HELLO KITTY";
+  
   auto data = make_shared<Data>();
   data->setName(dataName);
   data->setFreshnessPeriod(::ndn::time::milliseconds(m_freshness.GetMilliSeconds()));
-
-  data->setContent(make_shared< ::ndn::Buffer>(m_virtualPayloadSize));
-
+  
+  data->setContent(reinterpret_cast<const uint8_t*>(content.data()), content.size());
+  //data->setContent(make_shared< ::ndn::Buffer>(m_virtualPayloadSize));
+  
   Signature signature;
   SignatureInfo signatureInfo(static_cast< ::ndn::tlv::SignatureTypeValue>(255));
 

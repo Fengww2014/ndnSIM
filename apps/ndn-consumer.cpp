@@ -186,6 +186,7 @@ Consumer::SendPacket()
   //
 
   shared_ptr<Interest> interest = make_shared<Interest>();
+  
   interest->setNonce(m_rand->GetValue(0, std::numeric_limits<uint32_t>::max()));
   interest->setName(*nameWithSequence);
   time::milliseconds interestLifeTime(m_interestLifeTime.GetMilliSeconds());
@@ -226,7 +227,7 @@ Consumer::OnData(shared_ptr<const Data> data)
   auto fwwtag = data->getTag<lp::FwwTag>();
   if (fwwtag != nullptr)
     std::cout<<"FwwTag ===============>"<<*fwwtag<<std::endl;
-
+  std::cout<<(*data)<<std::endl;
   //add nexthop changed by fww   
 
 
