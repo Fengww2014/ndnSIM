@@ -409,14 +409,20 @@ Forwarder::onIncomingData(Face& inFace, const Data& data)
    
    for (const auto& nexthop : nexthops){
      std::cout<<"nexthop is "<<nexthop.getNextHopMac()<<std::endl;
-     //nfd::scheduler::schedule(time::seconds(1),[&]{thisNode->GetObject<ns3::ndn::L3Protocol>()->getForwarder()->getFib().removeNextHop(*(fibEntry_bool.first),inFace);});
+     //nfd::scheduler::schedule(time::seconds(1),bind(&(thisNode_FIB.removeNextHop),*(fibEntry_bool.first),inFace));
    }
 }
-
-
-
    //}else
 }
+
+
+
+
+
+
+
+
+
 
 void
 Forwarder::onDataUnsolicited(Face& inFace, const Data& data)
